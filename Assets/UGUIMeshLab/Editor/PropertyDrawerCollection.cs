@@ -19,7 +19,7 @@ public class LinePointDrawer : PropertyDrawer {
         if (!property.FindPropertyRelative("isFold").boolValue)
         {
             var next = property.FindPropertyRelative("isNextCurve").boolValue;
-            var prv = property.FindPropertyRelative("isPrvCurve").boolValue;
+            var prv = property.FindPropertyRelative("isPrevCurve").boolValue;
             
             var positionRect = new Rect(position.x + 65, position.y + 16, 140f, 16f);
             var positionPrvBool = new Rect(position.x + 10, position.y + 16, 30f, 16f);
@@ -41,7 +41,7 @@ public class LinePointDrawer : PropertyDrawer {
             //position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Native), label); //맴버의 이름인데 필요없을듯...?
             
             EditorGUI.PropertyField(positionNextBool,property.FindPropertyRelative("isNextCurve"),GUIContent.none);
-            EditorGUI.PropertyField(positionPrvBool, property.FindPropertyRelative("isPrvCurve"), GUIContent.none);
+            EditorGUI.PropertyField(positionPrvBool, property.FindPropertyRelative("isPrevCurve"), GUIContent.none);
             positionRect.x -= 20; GUI.Label(positionRect, "point"); positionRect.x += 20;
 
             EditorGUI.PropertyField(positionRect, property.FindPropertyRelative("point"), GUIContent.none);
@@ -60,11 +60,11 @@ public class LinePointDrawer : PropertyDrawer {
             {
                 positionRect.y -= 16;
                 positionRect.x -= 20; GUI.Label(positionRect, "prv"); positionRect.x += 20;
-                EditorGUI.PropertyField(positionRect, property.FindPropertyRelative("prvCurveOffset"), GUIContent.none);
+                EditorGUI.PropertyField(positionRect, property.FindPropertyRelative("prevCurveOffset"), GUIContent.none);
             }
             else
             {
-                property.FindPropertyRelative("prvCurveOffset").vector2Value = Vector2.zero;
+                property.FindPropertyRelative("prevCurveOffset").vector2Value = Vector2.zero;
             }
 
             EditorGUI.EndProperty();
@@ -72,6 +72,7 @@ public class LinePointDrawer : PropertyDrawer {
 
         EditorGUI.indentLevel = indent;
     }
+
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         if (property.FindPropertyRelative("isFold").boolValue)
@@ -83,7 +84,7 @@ public class LinePointDrawer : PropertyDrawer {
             propertyHeight += 16f;
         }
 
-        if (property.FindPropertyRelative("isPrvCurve").boolValue)
+        if (property.FindPropertyRelative("isPrevCurve").boolValue)
         {
             propertyHeight += 16f;
         }

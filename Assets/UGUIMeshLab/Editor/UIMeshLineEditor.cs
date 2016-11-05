@@ -51,7 +51,7 @@ public class UIMeshLineEditor : Editor {
                 cp0 = Handles.PositionHandle(ownerTrans.TransformPoint(cp0), Quaternion.identity);
                 Handles.Label(cp0, "curve" + n);
             }
-            if (owner.points[n].isPrvCurve)
+            if (owner.points[n].isPrevCurve)
             {
                 cp1 = Handles.PositionHandle(ownerTrans.TransformPoint(cp1), Quaternion.identity);
                 Handles.Label(cp1, "curve" + n);
@@ -65,7 +65,7 @@ public class UIMeshLineEditor : Editor {
                 {
                     owner.points[n].nextCurvePoint = ownerTrans.InverseTransformPoint(cp0);
                 }
-                if (owner.points[n].isPrvCurve)
+                if (owner.points[n].isPrevCurve)
                 {
                     owner.points[n].prvCurvePoint = ownerTrans.InverseTransformPoint(cp1);
                 }

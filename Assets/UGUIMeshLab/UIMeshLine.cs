@@ -261,15 +261,15 @@ public class UIMeshLine : MaskableGraphic, IMeshModifier
     Vector2 EvaluatePoint(LinePoint p0, LinePoint p1, float t)
     {
         //t = t * t;//보정...
-        if(p0.isNextCurve && !p1.isPrvCurve)
+        if(p0.isNextCurve && !p1.isPrevCurve)
         {
             return Curve.CalculateBezier(p0.point, p1.point, p0.nextCurvePoint, t);
         }
-        if(!p0.isNextCurve && p1.isPrvCurve)
+        if(!p0.isNextCurve && p1.isPrevCurve)
         {
             return Curve.CalculateBezier(p0.point, p1.point, p1.prvCurvePoint, t);
         }
-        if(p0.isNextCurve && p1.isPrvCurve)
+        if(p0.isNextCurve && p1.isPrevCurve)
         {
             return Curve.CalculateBezier(p0.point, p1.point, p0.nextCurvePoint, p1.prvCurvePoint, t);
         }
@@ -282,7 +282,7 @@ public class UIMeshLine : MaskableGraphic, IMeshModifier
     }
     Vector2 GetDerivative(LinePoint p0, LinePoint p1, float t)
     {
-        if(p0.isNextCurve || p1.isPrvCurve)
+        if(p0.isNextCurve || p1.isPrevCurve)
         {
             float oneMinusT = 1f - t;
             return
@@ -326,7 +326,7 @@ public class UIMeshLine : MaskableGraphic, IMeshModifier
         {
             throw new System.Exception("인덱스가 작음 index:" + index+ " maxValue : "+(points.Count-1));
         }
-        if (points[index].isNextCurve || points[index + 1].isPrvCurve)
+        if (points[index].isNextCurve || points[index + 1].isPrevCurve)
             return true;
 
         return false;
