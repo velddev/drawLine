@@ -48,15 +48,19 @@ public class UIPolygon : MaskableGraphic, IMeshModifier
 
         for (int n = 0; n < vertexInfoList.Count; n++)
         {
-            vh.AddVert(getRadiusPosition(vertexInfoList[n], n), checkVertexColor(vertexInfoList[n].color) ,Vector2.zero);
+            vh.AddVert(getRadiusPosition(vertexInfoList[n], n), checkVertexColor(vertexInfoList[n].color), Vector2.zero);
         }
+
+		// Add Center Vertex.
+		vh.AddVert (Vector3.zero, checkVertexColor (vertexInfoList [0].color), Vector2.zero);
 
         if (!innerPolygon)
         {
-            for (int n = 0; n < count - 2; n++)
+            for (int n = 0; n < count - 1; n++)
             {
-                vh.AddTriangle(0, n + 1, n + 2);
+				vh.AddTriangle(count, n, n + 1);
             }
+			vh.AddTriangle(count, count - 1, 0);
         }
         else
         {
